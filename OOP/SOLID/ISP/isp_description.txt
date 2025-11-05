@@ -1,0 +1,103 @@
+ISP (Interface Segretation Principle)
+
+Being the 4th principle of SOLID, The Interface Segretation Principle states that a client should not be forced to implement interfaces it doesn't use. 
+Instead of having one large interface, it's better to have multiple smaller, more specific interfaces. 
+This principle ensures that classes only need to implement methods that are relevant to them, promoting loose coupling and reducing the impact of changes.
+
+Examples
+
+Bad example:
+from abc import ABC, abstractmethod
+
+class Animal(ABC):
+    @abstractmethod
+    def eat(self):
+        pass
+    @abstractmethod
+    def walk(self):
+        pass
+    @abstractmethod
+    def swim(self):
+        pass
+    @abstractmethod
+    def fly(self):
+        pass
+
+class Cat(Animal):
+    def eat(self):
+        return True
+    def walk(self):
+        return True
+    def swim(self):
+        raise NotImplemented
+    def fly(self):
+        raise NotImplemented
+
+class Duck(Animal):
+    def eat(self):
+        return True
+    def walk(self):
+        return True
+    def swim(self):
+        return True
+    def fly(self):
+        raise NotImplemented
+
+class Pigeon(Animal):
+    def eat(self):
+        return True
+    def walk(self):
+        return True
+    def swim(self):
+        raise NotImplemented
+    def fly(self):
+        return True
+
+In the above code the class Animal is inherited by classes Cat, Duck and Pigeon, but these classes do not require all methods from the Animal class.
+Despite that, these classes are being forced to implement the methods, which are not required, violating the ISP principle.
+
+
+Good example:
+from abc import ABC, abstractmethod
+
+class Animal(ABC):
+    @abstractmethod
+    def eat(self):
+        pass
+    @abstractmethod
+    def walk(self):
+        pass
+
+class SwimAbility(ABC):
+    @abstractmethod
+    def swim(self):
+        pass
+
+class FlyAbility(ABC):
+    @abstractmethod
+    def fly(self):
+        pass
+
+class Cat(Animal):
+    def eat(self):
+        return True
+    def walk(self):
+        return True
+
+class Duck(Animal, SwimAbility):
+    def eat(self):
+        return True
+    def walk(self):
+        return True
+    def swim(self):
+        return True
+
+class Pigeon(Animal, FlyAbility):
+    def eat(self):
+        return True
+    def walk(self):
+        return True
+    def fly(self):
+        return True
+
+In this example, the code now satisfies the principle Interface Segregation Principle(ISP) by separating the non-common methods to new classes SwimAbility and FlyAbility.

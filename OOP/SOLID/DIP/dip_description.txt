@@ -1,0 +1,73 @@
+DIP (Depedency Inversion Principle)
+
+The Depedency Inversion Principle is the 5th and final principle of SOLID. 
+It states that high level modules should not depend of low level modules. Instead, both modules should depend on abstractions.
+Additionally, abstractions should not depend on details; details should depend on abstractions.
+
+Examples
+
+Bad example:
+class LightBulb:
+    def turn_on(self):
+        print("LightBulb: on")
+
+    def turn_off(self):
+        print("LightBulb: off")
+
+class PowerSwitch:
+    def __init__(self, light_bulb: LightBulb):
+        self.light_bulb = light_bulb
+        self.on = False
+
+    def press(self):
+        if self.on:
+            self.light_bulb.turn_off()
+        else:
+            self.light_bulb.turn_on()
+            self.on = True
+
+light_bulb = LightBulb()
+switch = PowerSwitch(light_bulb)
+switch.press()
+switch.press()
+
+The above code works perfectly, but it violates the Dependency Inversion Principle(DIP) due to the class PowerSwitch being tightly coupled with class LightBulb. 
+The power switch object takes in a light bulb and then directly calls the turn off and turn on method on that instance.
+
+Good example:
+from abc import ABC, abstractmethod
+
+class Switchable(ABC):
+    @abstractmethod
+    def turn_on(self):
+        pass
+    @abstractmethod
+    def turn_off(self):
+        pass
+
+class LightBulb(Switchable):
+    def turn_on(self):
+        print("LightBulb: on")
+
+    def turn_off(self):
+        print("LightBulb: off")
+
+class PowerSwitch:
+    def __init__(self, device: Switchable):
+        self.device = device
+        self.on = False
+
+    def press(self):
+        if self.on:
+            self.device.turn_off()
+        else:
+            self.device.turn_on()
+            self.on = True
+
+light_bulb = LightBulb()
+switch = PowerSwitch(light_bulb)
+switch.press()
+switch.press()
+
+By implementing the DIP principle, the class PowerSwitch no longer depends on the class LightBulb. 
+Now, it depends on the abstract class Switchable.  

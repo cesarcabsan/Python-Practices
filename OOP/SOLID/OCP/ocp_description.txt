@@ -1,0 +1,63 @@
+OCP (Open-Closed Principle)
+
+The Open Closed Principle is the 2nd principle of SOLID.
+It states that software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification. 
+This means that you should be able to add new functionality to a class or module without changing its existing code. 
+
+Examples
+
+Bad example:
+class Order:
+    def __init__(self, items, shipping_method):
+        self.items = items
+        self.shipping_method = shipping_method
+
+class ShippingCalculator:
+    def calculate(self, order):
+        if order.shipping_method == 'standard':
+            return self.calculate_standard(order)
+        elif order.shipping_method == 'express':
+            return self.calculate_express(order)
+
+    def calculate_standard(self, order):
+        return sum(item['price'] for item in order.items) * 0.1
+
+    def calculate_express(self, order):
+        return sum(item['price'] for item in order.items) * 0.2
+
+In this example, the ShippingCalculator class needs to be modified whenever a new shipping method is added, which violates the Open/Closed Principle
+
+
+Good example:
+class Order:
+    def __init__(self, items, shipping_method: ShippingMethod):
+        self.items = items
+        self.shipping_method = shipping_method
+
+class StandardShipping(ShippingMethod):
+    def calculate(self, order: Order):
+        return sum(item['price'] for item in order.items) * 0.1
+
+class ExpressShipping(ShippingMethod):
+    def calculate(self, order: Order):
+        return sum(item['price'] for item in order.items) * 0.2
+
+class ShippingCalculator:
+    def calculate(self, order: Order):
+        return order.shipping_method.calculate(order)
+    
+standard_shipping = StandardShipping()
+order = Order(items=[{'price': 100}, {'price': 200}], shipping_method=standard_shipping)
+calculator = ShippingCalculator()
+print(calculator.calculate(order))  # Output: 30.0
+
+express_shipping = ExpressShipping()
+order_express = Order(items=[{'price': 100}, {'price': 200}], shipping_method=express_shipping)
+print(calculator.calculate(order_express))  # Output: 60.0
+
+
+In this refactored example:
+- The ShippingMethod class defines a common interface for all shipping methods.
+- The StandardShipping and ExpressShipping classes implement the ShippingMethod interface.
+- The ShippingCalculator class calculates the shipping cost using the shipping method provided in the order.
+By adhering to the Open/Closed Principle, we can add new shipping methods (e.g., OvernightShipping, InternationalShipping) without modifying the existing ShippingCalculator class. 

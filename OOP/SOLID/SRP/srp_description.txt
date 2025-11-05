@@ -1,0 +1,58 @@
+SRP (Single Responsability Principle)
+
+Being the 1st principle of SOLID, The Single Responsability Principle states that a class that a class should have only one well-defined responsibility. 
+In other words, a class should be responsible for only one task or one aspect of the system.
+
+Examples:
+
+Bad Example 
+class User:
+    def create_user(self, username, password, email):
+        print("registered user in db")
+    def send_email(self, subject, to_email):
+        print("email sent")
+    def log_error(self, error):
+        print("log:", error)
+    def register_user(self, username, password, email):
+        try:
+            self.create_user(username, password, email)
+            self.send_email("user registered", email)
+        except Exception:
+            self.log_error("error in user register")
+
+user = User()
+user.register_user("anji", "secret", "anji@example.com")
+
+In the class User, we can see it has a total of 4 responsibilities: the register_user, login_user, send_email and log_error. Therefore violating the SRP principle.
+
+
+Good Example
+class UserDB:
+    def create_user(self, username, password, email):
+        print("registered user in db")
+
+class Email:
+    def send_email(self, subject, to_email):
+        print("email sent")
+
+class ErrorLog:
+    def log_error(self, error):
+        print("log:", error)
+
+class User:
+    def register_user(self, username, password, email):
+        try:
+            user_db = UserDB()
+            user_db.create_user(username, password, email)
+            email_server = Email()
+            email_server.send_email("user registered", email)
+        except Exception:
+            logger = ErrorLog()
+            logger.log_error("error in user register")
+
+if __name__ == '__main__':
+    user = User()
+    user.register_user("anji", "secret", "anji@example.com")
+
+By implementing the Single Responsibility Principle we can see that the code more readable and maintainable now, due to each class implementing their specific method.
+Let's say if want to add a new feature to update_user which updates the user info to the database. We can simply add the method to UserDB class. Because, it's related to database.

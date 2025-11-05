@@ -1,0 +1,81 @@
+LSP (Liskov Sustitute Principle)
+
+The Liskov Sustitute Principle is the 3rd principle in the SOLID set. 
+It states that objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program. 
+In other words, if class B is a subclass of class A, then we should be able to replace A with B without breaking the application.
+
+Examples
+
+Bad example:
+class Shape(ABC):
+    @abstractmethod
+    def get_area(self):
+        pass
+    
+class Rectangle(Shape):
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+        
+    def get_area(self):
+        return self.width * self.height
+        
+class Square(Shape):
+    def __init__(self, side):
+        self.side = side
+    
+    # The square's area is incorrectly calculated
+    def get_area(self):
+        # Violating LSP: altering expected behavior
+        return self.side * self.side + 10  # Introduces a constant offset (wrong logic)
+
+def calculate_area(shape: Shape):
+    return shape.get_area()
+
+# Now using the square, which has incorrect behavior
+rectangle = Rectangle(4, 5)
+square = Square(5)
+
+shapes = [rectangle, square]
+for shape in shapes:
+    print(calculate_area(shape))
+
+In the above example, the Square class does not adhere to the expected behavior of the get_area method. 
+The get_area method for Square is incorrect (it adds an arbitrary constant +10), which breaks the expected behavior of calculate_area. 
+This violates LSP because Square is supposed to be substitutable for Shape, but its behavior is inconsistent with the general rule of calculating areas.
+
+
+Good example:
+class Shape(ABC):
+    @abstractmethod
+    def get_area(self):
+        pass
+    
+class Rectangle(Shape):
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+        
+    def get_area(self):
+        return self.width * self.height
+        
+class Square(Shape):
+    def __init__(self, side):
+        self.side = side
+        
+    def get_area(self):
+        return self.side * self.side
+        
+def calculate_area(shape: Shape):
+    return shape.get_area()
+
+# Normal execution
+rectangle = Rectangle(4, 5)
+square = Square(5)
+
+shapes = [rectangle, square]
+for shape in shapes:
+    print(calculate_area(shape))
+
+Now, in this example, both Rectangle and Square can now be substituted for Shape without breaking the functionality. 
+The behavior of calculate_area doesn't change when passed a Rectangle or a Square.

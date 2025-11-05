@@ -1,0 +1,2 @@
+Calculating
+Added 10 and 52, result = 62
