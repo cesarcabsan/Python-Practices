@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 bus_line_A = [6.5, 7.0, 8.25, 9.5, 11.0, 13.0, 15.25, 17.0]
 bus_line_B = [6.0, 7.5, 9.0, 10.5, 12.0, 14.0, 16.0, 18.0]
 
-# Put the together
+# Put them together
 bus_data = [bus_line_A, bus_line_B]
 
 # create event plot
