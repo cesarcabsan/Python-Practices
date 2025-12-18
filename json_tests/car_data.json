@@ -1,0 +1,17 @@
+{
+  "Toyota Camry": {
+    "year": 2023,
+    "price": 28000,
+    "color": "Red"
+  },
+  "Honda Civic": {
+    "year": 2022,
+    "price": 25000,
+    "color": "Silver"
+  },
+  "Ford Mustang": {
+    "year": 2024,
+    "price": 45000,
+    "color": "Black"
+  }
+}
