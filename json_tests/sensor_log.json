@@ -1,0 +1,21 @@
+{
+    "timestamp": "2025-12-19T18:50:13.238438",
+    "location": "Monterrey, MX",
+    "readings": [
+        {
+            "sensor_id": "temp_01",
+            "temperature": 22.5,
+            "unit": "C"
+        },
+        {
+            "sensor_id": "hum_02",
+            "humidity": 45,
+            "unit": "%"
+        },
+        {
+            "sensor_id": "airq_03",
+            "air_quality_index": 72,
+            "unit": "AQI"
+        }
+    ]
+}
