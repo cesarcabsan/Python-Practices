@@ -1,0 +1,20 @@
+[
+  {
+    "id": 101,
+    "name": "Alice",
+    "role": "Engineer",
+    "access_level": "medium"
+  },
+  {
+    "id": 102,
+    "name": "Bob",
+    "role": "Manager",
+    "access_level": "high"
+  },
+  {
+    "id": 103,
+    "name": "Charlie",
+    "role": "Intern",
+    "access_level": "low"
+  }
+]
