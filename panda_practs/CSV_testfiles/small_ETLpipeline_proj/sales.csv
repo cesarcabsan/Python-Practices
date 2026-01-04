@@ -1,0 +1,11 @@
+order_id,customer,amount,date
+1,Allen,300,1/1/2026
+2,Jacob,N/A,1/1/2026
+3,Alice,250,1/1/2026
+4,Bob,250,1/1/2026
+5,Charlie,N/A,1/1/2026
+6,Sandra,240,1/2/2026
+7,Juana,230,1/2/2026
+8,Sean,N/A,1/2/2026
+9,Mason,250,1/3/2026
+10,Dana,250,1/3/2026
