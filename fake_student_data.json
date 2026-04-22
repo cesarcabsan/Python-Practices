@@ -1,0 +1,37 @@
+{
+    "0": {
+        "id": 6,
+        "name": "Jessica Ramirez MD",
+        "address": "9662 Thomas Mountain Suite 218\nEast Richard, MN 31967",
+        "latitude": -60.7356965,
+        "longitude": -136.821095
+    },
+    "1": {
+        "id": 3,
+        "name": "Tracy Young",
+        "address": "6937 Deborah Radial\nWest Rebecca, MH 88133",
+        "latitude": -83.26043,
+        "longitude": 58.858283
+    },
+    "2": {
+        "id": 4,
+        "name": "James Martinez",
+        "address": "88068 Moore Spurs\nRobertton, MA 22658",
+        "latitude": 79.7790495,
+        "longitude": 179.443059
+    },
+    "3": {
+        "id": 9,
+        "name": "Sarah Davis",
+        "address": "5570 Brian Ports\nNorth Hannah, HI 59851",
+        "latitude": 52.7574115,
+        "longitude": 5.067681
+    },
+    "4": {
+        "id": 4,
+        "name": "Carol Walker",
+        "address": "60270 Martha Harbors Apt. 435\nNew Mollyside, TN 34686",
+        "latitude": 84.6561385,
+        "longitude": -98.098038
+    }
+}
